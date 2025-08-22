@@ -16,25 +16,6 @@ router.get(
 );
 
 //get all admin user
-router.get(
-  "/admins",
-  // auth(userRole["super-admin"]),
-  UserControllers.getAllAdminUser
-);
-
-//get all vendor user
-router.get(
-  "/vendors",
-  // auth(userRole["super-admin"]),
-  UserControllers.getAllVendorUser
-);
-
-//get super admin
-router.get(
-  "/admins/:id",
-  // auth(userRole["super-admin"]),
-  UserControllers.getSuperAdmin
-);
 
 router.get("/:id", UserControllers.getSingleUser);
 
