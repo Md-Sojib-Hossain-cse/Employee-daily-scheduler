@@ -1,71 +1,81 @@
 import config from "../../config";
-import { UserModel } from "../user/user.model";
+import { AuthModel } from "./auth.model";
 import { TAuth } from "./auth.interface";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import AppError from "../../errors/handleAppError";
 import httpStatus from "http-status";
 
-//register a user in database
-const registerUserOnDB = async (payload: TAuth) => {
-  const result = await UserModel.create(payload);
+// Register a new user
+const createUserOnDB = async (payload: TAuth) => {
+  const isUserExists = await AuthModel.findOne({ email: payload?.email });
+
+  if (isUserExists) {
+    throw new AppError(httpStatus.CONFLICT, "User already exist!");
+  }
+
+  const result = await AuthModel.create(payload);
   return result;
 };
 
-//login an user with credentials
-const loginUserFromDB = async (payload: TAuth) => {
-  const isUserExists = await UserModel.findOne({
-    email: payload?.email,
-  });
+// Login user
+const loginUserFromDB = async (payload: {
+  email: string;
+  password: string;
+}) => {
+  const isUserExists = await AuthModel.findOne({ email: payload?.email });
 
-  // Check if a user exists with the provided email
   if (!isUserExists) {
-    throw Error("User does not exists!");
+    throw new AppError(httpStatus.NOT_FOUND, "User does not exist!");
   }
 
-  //check password
+  // Compare hashed password
   const isPasswordMatched = await bcrypt.compare(
     payload?.password,
     isUserExists?.password
   );
 
   if (!isPasswordMatched) {
-    throw new AppError(httpStatus.UNAUTHORIZED, "Wrong Credentials!");
+    throw new AppError(httpStatus.UNAUTHORIZED, "Wrong credentials!");
   }
 
-  const user = await UserModel.findByIdAndUpdate(
+  // Update active status
+  const user = await AuthModel.findByIdAndUpdate(
     isUserExists?._id,
-    { status: "active" },
+    { isActive: true },
     { new: true }
   );
 
-  //generating token
+  //removing password from payload
+  if (user) {
+    user.password = "";
+  }
+
+  // JWT payload
   const jwtPayload = {
     email: isUserExists?.email,
     role: isUserExists?.role,
   };
 
-  //token
-  const token = jwt.sign(jwtPayload, config.jwt_access_secret as string, {
+  // Access token
+  const accessToken = jwt.sign(jwtPayload, config.jwt_access_secret as string, {
     expiresIn: "24h",
   });
 
-  const userObject = {
-    user: user,
-    accessToken: token,
+  return {
+    user,
+    accessToken,
   };
-
-  return userObject;
 };
 
-//logout current user and removing token from cookie
+// Logout user
 const logoutUserFromDB = async (id: string) => {
-  await UserModel.findByIdAndUpdate(id, { status: "inActive" }, { new: true });
+  await AuthModel.findByIdAndUpdate(id, { isActive: false }, { new: true });
   return {};
 };
 
 export const AuthServices = {
-  registerUserOnDB,
+  createUserOnDB,
   loginUserFromDB,
   logoutUserFromDB,
 };

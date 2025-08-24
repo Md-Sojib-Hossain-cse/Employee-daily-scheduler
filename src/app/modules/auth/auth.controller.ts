@@ -4,62 +4,63 @@ import sendResponse from "../../utils/sendResponse";
 import catchAsync from "../../utils/catchAsync";
 import config from "../../config";
 
-const registerUser = catchAsync(async (req, res) => {
-    const userInfo = req.body;
-    const result = await AuthServices.registerUserOnDB(userInfo);
+// Register User
+const createUser = catchAsync(async (req, res) => {
+  const userInfo = req.body;
+  const result = await AuthServices.createUserOnDB(userInfo);
 
-    sendResponse(res , {
-        statusCode : httpStatus.CREATED,
-        success : true,
-        message : "User has been registered successfully!",
-        data : result
-    })
-})
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "User has been registered successfully!",
+    data: result,
+  });
+});
 
+// Login User
+const loginUser = catchAsync(async (req, res) => {
+  const userInfo = req.body;
+  const result = await AuthServices.loginUserFromDB(userInfo);
 
-const loginUser = catchAsync(async (req , res ) => {
-    const userInfo = req?.body;
-    const result = await AuthServices.loginUserFromDB(userInfo);
+  sendResponse(
+    res.cookie("accessToken", result?.accessToken, {
+      httpOnly: true,
+      secure: config.node_env === "production",
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    }),
+    {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "User logged in successfully!",
+      data: result?.user,
+    }
+  );
+});
 
-    sendResponse(
-        res.cookie('accessToken', result?.accessToken, {
-          httpOnly: true,
-          secure: config.node_env === 'production',
-          sameSite: 'none',
-          maxAge: 24 * 60 * 60 * 1000,
-        }),
-        {
-          success: true,
-          statusCode: httpStatus.OK,
-          message: 'User Logged in Successfully!',
-          data: result?.user,
-        },
-      );
-})
+// Logout User
+const logoutUser = catchAsync(async (req, res) => {
+  const userId = req.params.id;
+  const result = await AuthServices.logoutUserFromDB(userId);
 
-const logOutUser = catchAsync(async (req , res) => {
-    const userId = req.params.id;
-    const result = await AuthServices.logoutUserFromDB(userId);
-
-    sendResponse(
-        res.cookie('accessToken', "", {
-          httpOnly: true,
-          secure: config.node_env === 'production',
-          sameSite: 'none',
-          maxAge: 0,
-        }),
-        {
-          success: true,
-          statusCode: httpStatus.OK,
-          message: 'User Logged Out Successfully!',
-          data: result,
-        },
-      );
-})
-
+  sendResponse(
+    res.cookie("accessToken", "", {
+      httpOnly: true,
+      secure: config.node_env === "production",
+      sameSite: "none",
+      maxAge: 0,
+    }),
+    {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "User logged out successfully!",
+      data: result,
+    }
+  );
+});
 
 export const AuthController = {
-    registerUser,
-    loginUser,
-    logOutUser
-}
+  createUser,
+  loginUser,
+  logoutUser,
+};

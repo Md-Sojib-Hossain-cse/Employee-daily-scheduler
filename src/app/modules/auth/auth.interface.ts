@@ -3,5 +3,5 @@ export type TAuth = {
   email: string;
   password: string;
   role: string;
-  isActive: string;
+  isActive: Boolean;
 };

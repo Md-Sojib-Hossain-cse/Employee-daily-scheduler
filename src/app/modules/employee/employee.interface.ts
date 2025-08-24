@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export type TAvailability = {
   dayOfWeek: number;
   start: string;
@@ -5,12 +7,12 @@ export type TAvailability = {
 };
 
 export type TEmployee = {
-  name: string;
-  email: string;
-  password: string;
-  role: string;
+  userId: Types.ObjectId;
+  department: string;
+  position: string;
   skills: string[];
   location: string;
   availability: TAvailability[];
+  hireDate: Date;
   employmentType: "full-time" | "part-time";
 };
