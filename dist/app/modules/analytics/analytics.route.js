@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnalyticsRoutes = void 0;
+const express_1 = require("express");
+const analytics_controller_1 = require("./analytics.controller");
+const router = (0, express_1.Router)();
+router.get("/coverage", analytics_controller_1.AnalyticsController.getCoverage);
+router.get("/workload", analytics_controller_1.AnalyticsController.getWorkload);
+router.get("/conflicts", analytics_controller_1.AnalyticsController.getConflicts);
+exports.AnalyticsRoutes = router;

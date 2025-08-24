@@ -16,10 +16,11 @@ const createUserValidationSchema = zod_1.z.object({
         error: () => "Password is required to create a User!",
     }),
     role: zod_1.z
-        .string({
-        error: () => "Role is required to create a User!",
+        .enum(["admin", "hr", "employee"], {
+        message: "Role must be either 'admin', 'hr', or 'employee'",
     })
-        .optional(),
+        .optional()
+        .default("employee"),
     isActive: zod_1.z.boolean().default(false),
 });
 const loginUserValidationSchema = zod_1.z.object({

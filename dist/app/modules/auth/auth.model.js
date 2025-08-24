@@ -31,8 +31,9 @@ const authSchema = new mongoose_1.Schema({
         required: [true, "Password is required to create a User!"],
     },
     role: {
-        type: String, // we can use enum type if we know which roles are applicable
-        default: "user",
+        type: String,
+        enum: ["admin", "hr", "employee"],
+        default: "employee",
     },
     isActive: {
         type: Boolean,

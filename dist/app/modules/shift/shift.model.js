@@ -36,7 +36,6 @@ const shiftSchema = new mongoose_1.Schema({
         type: String,
         enum: ["daily", "weekly", "monthly"],
         default: "daily",
-        required: [true, "Recurring pattern is required!"],
     },
 }, {
     timestamps: true,

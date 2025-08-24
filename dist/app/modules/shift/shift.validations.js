@@ -32,9 +32,11 @@ const createShiftValidationSchema = zod_1.z.object({
     }))
         .optional()
         .default([]),
-    recurringPatterns: zod_1.z.enum(["daily", "weekly", "monthly"], {
+    recurringPatterns: zod_1.z
+        .enum(["daily", "weekly", "monthly"], {
         message: "Recurring pattern must be daily, weekly, or monthly!",
-    }),
+    })
+        .optional(),
 });
 exports.ShiftValidations = {
     createShiftValidationSchema,
