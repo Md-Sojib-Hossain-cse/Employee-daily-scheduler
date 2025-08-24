@@ -60,7 +60,7 @@ Base Api : https://daily-scheduler-seven.vercel.app/api/v1
 
 3. logout user : baseApi/auth/logout/:id (POST)
 
-## Auth Routes :
+## Employee Routes :
 
 1. create employee : baseApi/employee/create-employee (POST)
 
@@ -107,3 +107,67 @@ Base Api : https://daily-scheduler-seven.vercel.app/api/v1
 4. get single employee : baseApi/employee/:employeeId (GET)
 
 5. delete an employee : baseApi/employee/:employeeId (DELETE)
+
+## Shift Routes :
+
+1. create shift : baseApi/shift/create-shift (POST)
+
+```
+{
+  "day": "2025-08-26T00:00:00.000Z",
+  "start": "08:00",
+  "end": "16:00",
+  "role": "Backend Developer",
+  "skillRequired": ["Express" , "MongoDB"],
+  "location": "Warehouse #3",
+  "assignedEmployee": [],
+  "recurringPatterns": "weekly"
+}
+
+```
+
+2. assign employee : baseApi/shift/:shiftId/assign (PUT)
+
+```
+{
+    "employeeId" : "68ab120cae09c0b6a6d38c0b"
+}
+```
+
+3. get all shift : baseApi/shift (GET)
+
+4. get single shift : baseApi/employee/:shiftId (GET)
+
+5. delete a shift : baseApi/employee/:shiftId (DELETE)
+
+## Time off Routes :
+
+1. create time off request : baseApi/time-off/create-time-off (POST)
+
+```
+{
+  "employee": "68ab120cae09c0b6a6d38c0b",
+  "start": "2025-08-28T09:00:00.000Z",
+  "end": "2025-08-30T17:00:00.000Z",
+  "reason": "Family event",
+  "status": "pending"
+}
+```
+
+2. update time off : baseApi/time-off/:timeOffId/update (PATCH)
+
+```
+{
+  "status": "approved"
+}
+```
+
+3. get all time off : baseApi/time-off (GET)
+
+## Analytics Routes :
+
+1. get coverage : baseApi/analytics/coverage?day=2025-08-25 (GET)
+
+2. get workload : baseApi/analytics/workload?startDay=2025-08-24&endDay=2025-08-30 (GET)
+
+3. get conflicts : baseApi/analytics/conflicts?day=2025-08-25 (GET)
