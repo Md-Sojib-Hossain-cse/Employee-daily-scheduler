@@ -8,5 +8,5 @@ export type TShift = {
   skillRequired: string[];
   location: string;
   assignedEmployee: Types.ObjectId[];
-  recurringPatterns: "daily" | "weekly" | "monthly";
+  recurringPatterns?: "daily" | "weekly" | "monthly";
 };

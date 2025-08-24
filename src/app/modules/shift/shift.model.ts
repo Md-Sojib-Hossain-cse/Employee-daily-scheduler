@@ -36,7 +36,6 @@ const shiftSchema = new Schema<TShift>(
       type: String,
       enum: ["daily", "weekly", "monthly"],
       default: "daily",
-      required: [true, "Recurring pattern is required!"],
     },
   },
   {

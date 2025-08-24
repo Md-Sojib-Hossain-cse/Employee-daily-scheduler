@@ -35,9 +35,11 @@ const createShiftValidationSchema = z.object({
     )
     .optional()
     .default([]),
-  recurringPatterns: z.enum(["daily", "weekly", "monthly"], {
-    message: "Recurring pattern must be daily, weekly, or monthly!",
-  }),
+  recurringPatterns: z
+    .enum(["daily", "weekly", "monthly"], {
+      message: "Recurring pattern must be daily, weekly, or monthly!",
+    })
+    .optional(),
 });
 
 export const ShiftValidations = {
