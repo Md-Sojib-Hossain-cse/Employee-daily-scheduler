@@ -59,3 +59,51 @@ Base Api : https://daily-scheduler-seven.vercel.app/api/v1
 ```
 
 3. logout user : baseApi/auth/logout/:id (POST)
+
+## Auth Routes :
+
+1. create employee : baseApi/employee/create-employee (POST)
+
+```
+{
+  "userId": "68ab0d3871eb3b9855172330",
+  "department": "Developer",
+  "position": "Frontend Developer",
+  "skills": ["React", "TypeScript", "Tailwind CSS"],
+  "location": "Dhaka, Bangladesh",
+  "availability": [
+    {
+      "dayOfWeek": 1,
+      "start": "09:00",
+      "end": "17:00"
+    },
+    {
+      "dayOfWeek": 3,
+      "start": "10:00",
+      "end": "18:00"
+    }
+  ],
+  "hireDate": "2025-08-24",
+  "employmentType": "full-time"
+}
+```
+
+2. update employee : baseApi/employee/update-employee/:employeeId (PATCH)
+
+```
+{
+  "department": "Developer",
+  "position": "Backend Developer",
+  "skills": [
+            "Express",
+            "TypeScript",
+            "MongoDB"
+        ]
+}
+```
+
+3. get all employee : baseApi/employee (GET)
+
+4. get single employee : baseApi/employee/:employeeId (GET)
+
+5. delete an employee : baseApi/employee/:employeeId (DELETE)
