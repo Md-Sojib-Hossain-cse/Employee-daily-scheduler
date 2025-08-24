@@ -171,3 +171,8 @@ Base Api : https://daily-scheduler-seven.vercel.app/api/v1
 2. get workload : baseApi/analytics/workload?startDay=2025-08-24&endDay=2025-08-30 (GET)
 
 3. get conflicts : baseApi/analytics/conflicts?day=2025-08-25 (GET)
+
+## Developed by :
+
+Name : MD Sojib Hossain
+Email : sojibhossain.cse@gmail.com
