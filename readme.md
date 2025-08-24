@@ -25,3 +25,11 @@ JWT_ACCESS_SECRET=e9f3fd12e521b4b7499f92f3d7fff142c4f2e37312cada49b5b3826a35edc8
 npm run dev
 
 ```
+
+## System Diagram
+
+Link : https://lucid.app/lucidchart/8b25fb22-0967-40d3-b7be-9a5b93e11334/edit?viewport_loc=497%2C-528%2C3223%2C1352%2C0_0&invitationId=inv_9f0fad94-411b-4b6e-ae2f-92fa62a2fed5
+
+## Api and Data models
+
+# Base Api : https://daily-scheduler-seven.vercel.app/api/v1
