@@ -18,48 +18,51 @@ const http_status_1 = __importDefault(require("http-status"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const config_1 = __importDefault(require("../../config"));
-const registerUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// Register User
+const createUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userInfo = req.body;
-    const result = yield auth_service_1.AuthServices.registerUserOnDB(userInfo);
+    const result = yield auth_service_1.AuthServices.createUserOnDB(userInfo);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.CREATED,
         success: true,
         message: "User has been registered successfully!",
-        data: result
+        data: result,
     });
 }));
+// Login User
 const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userInfo = req === null || req === void 0 ? void 0 : req.body;
+    const userInfo = req.body;
     const result = yield auth_service_1.AuthServices.loginUserFromDB(userInfo);
-    (0, sendResponse_1.default)(res.cookie('accessToken', result === null || result === void 0 ? void 0 : result.accessToken, {
+    (0, sendResponse_1.default)(res.cookie("accessToken", result === null || result === void 0 ? void 0 : result.accessToken, {
         httpOnly: true,
-        secure: config_1.default.node_env === 'production',
-        sameSite: 'none',
-        maxAge: 24 * 60 * 60 * 1000,
+        secure: config_1.default.node_env === "production",
+        sameSite: "none",
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
     }), {
         success: true,
         statusCode: http_status_1.default.OK,
-        message: 'User Logged in Successfully!',
+        message: "User logged in successfully!",
         data: result === null || result === void 0 ? void 0 : result.user,
     });
 }));
-const logOutUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// Logout User
+const logoutUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.id;
     const result = yield auth_service_1.AuthServices.logoutUserFromDB(userId);
-    (0, sendResponse_1.default)(res.cookie('accessToken', "", {
+    (0, sendResponse_1.default)(res.cookie("accessToken", "", {
         httpOnly: true,
-        secure: config_1.default.node_env === 'production',
-        sameSite: 'none',
+        secure: config_1.default.node_env === "production",
+        sameSite: "none",
         maxAge: 0,
     }), {
         success: true,
         statusCode: http_status_1.default.OK,
-        message: 'User Logged Out Successfully!',
+        message: "User logged out successfully!",
         data: result,
     });
 }));
 exports.AuthController = {
-    registerUser,
+    createUser,
     loginUser,
-    logOutUser
+    logoutUser,
 };

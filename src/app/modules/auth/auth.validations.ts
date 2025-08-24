@@ -13,9 +13,11 @@ const createUserValidationSchema = z.object({
   password: z.string({
     error: () => "Password is required to create a User!",
   }),
-  role: z.string({
-    error: () => "Role is required to create a User!",
-  }),
+  role: z
+    .string({
+      error: () => "Role is required to create a User!",
+    })
+    .optional(),
   isActive: z.boolean().default(false),
 });
 
