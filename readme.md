@@ -28,10 +28,34 @@ npm run dev
 
 ```
 
-## System Diagram
+## System Diagram :
 
 Link : https://lucid.app/lucidchart/8b25fb22-0967-40d3-b7be-9a5b93e11334/edit?viewport_loc=497%2C-528%2C3223%2C1352%2C0_0&invitationId=inv_9f0fad94-411b-4b6e-ae2f-92fa62a2fed5
 
-## Api and Data models
+## Api and Data models :
 
-### Base Api : https://daily-scheduler-seven.vercel.app/api/v1
+Base Api : https://daily-scheduler-seven.vercel.app/api/v1
+
+## Auth Routes :
+
+1. create user : baseApi/auth/register (POST)
+
+```
+{
+  "name": "MD Sojib Hossain",
+  "email": "test10@gmail.com",
+  "password": "adminadmin",
+  "role": "employee"
+}
+```
+
+2. login user : baseApi/auth/login (POST)
+
+```
+{
+  "email": "admin@gmail.com",
+  "password": "adminadmin"
+}
+```
+
+3. logout user : baseApi/auth/logout/:id (POST)
