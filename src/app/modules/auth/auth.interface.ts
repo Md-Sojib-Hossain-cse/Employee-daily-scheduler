@@ -1,7 +1,9 @@
+export type TUserRole = "admin" | "hr" | "employee";
+
 export type TAuth = {
   name: string;
   email: string;
   password: string;
-  role: "admin" | "hr" | "employee";
+  role: TUserRole;
   isActive: Boolean;
 };

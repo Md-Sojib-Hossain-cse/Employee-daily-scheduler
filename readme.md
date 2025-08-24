@@ -36,6 +36,17 @@ Link : https://lucid.app/lucidchart/8b25fb22-0967-40d3-b7be-9a5b93e11334/edit?vi
 
 Base Api : https://daily-scheduler-seven.vercel.app/api/v1
 
+## Current Roles
+
+1. admin
+2. hr
+3. employee
+
+# Auth validation only applied on analytics
+
+Admin Email : admin@gmail.com
+Admin Password : adminadmin
+
 ## Auth Routes :
 
 1. create user : baseApi/auth/register (POST)

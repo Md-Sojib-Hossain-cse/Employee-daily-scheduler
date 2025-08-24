@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { AnalyticsController } from "./analytics.controller";
+import auth from "../../middlewares/auth";
 
 const router = Router();
 
-router.get("/coverage", AnalyticsController.getCoverage);
+router.get("/coverage", auth("admin"), AnalyticsController.getCoverage);
 
-router.get("/workload", AnalyticsController.getWorkload);
+router.get("/workload", auth("admin"), AnalyticsController.getWorkload);
 
-router.get("/conflicts", AnalyticsController.getConflicts);
+router.get("/conflicts", auth("admin"), AnalyticsController.getConflicts);
 
 export const AnalyticsRoutes = router;
