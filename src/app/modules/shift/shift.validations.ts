@@ -40,19 +40,6 @@ const createShiftValidationSchema = z.object({
   }),
 });
 
-// Shift update validation (all fields optional)
-const updateShiftValidationSchema = z.object({
-  day: z.string().optional(),
-  start: z.string().optional(),
-  end: z.string().optional(),
-  role: z.string().optional(),
-  skillRequired: z.array(z.string()).optional(),
-  location: z.string().optional(),
-  assignedEmployee: z.array(z.string()).optional(),
-  recurringPatterns: z.enum(["daily", "weekly", "monthly"]).optional(),
-});
-
 export const ShiftValidations = {
   createShiftValidationSchema,
-  updateShiftValidationSchema,
 };
