@@ -1,4 +1,6 @@
-### Employee daily schedule management platform
+# Employee daily schedule management platform
+
+This is a backend service for managing employee schedules, shifts, and coverage. It supports employees, shifts, time-off requests, and analytics for conflict detection and coverage.
 
 Live link : https://daily-scheduler-seven.vercel.app
 
@@ -32,4 +34,4 @@ Link : https://lucid.app/lucidchart/8b25fb22-0967-40d3-b7be-9a5b93e11334/edit?vi
 
 ## Api and Data models
 
-# Base Api : https://daily-scheduler-seven.vercel.app/api/v1
+### Base Api : https://daily-scheduler-seven.vercel.app/api/v1
